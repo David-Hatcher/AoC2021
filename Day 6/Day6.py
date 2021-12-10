@@ -9,7 +9,7 @@ def getInputs(fileName):
     file.close()
     return line
 
-def passDay(fishes):
+def passDaysSlow(fishes):
     currentFishesCount = len(fishes)
     for i in range(currentFishesCount):
         if fishes[i] == 0:
@@ -19,8 +19,8 @@ def passDay(fishes):
             fishes[i] -= 1
     return fishes
 
-def passDayFast(fishes,days):
-    d = { 0:0, 1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0 }
+def passDaysFast(fishes,days):
+    d = { x : 0 for x in range(9) }
     fishSet = set(fishes)
     for fish in fishSet:
         d[fish] += fishes.count(fish)
@@ -41,12 +41,12 @@ def passDayFast(fishes,days):
         fishSum += value
     return fishSum
 
-fishes = getInputs(INPUTREAL)
-# print(fishes)
-# for _ in range(256):
-#     print(_)
-#     fishes = passDay(fishes)
-#     print(len(fishes))
+fishesInit = getInputs(INPUTREAL)
 
-fishes = passDayFast(fishes,256)
+'''Part One'''
+fishes = passDaysFast(fishesInit,80)
+print(fishes)
+
+'''Part Two'''
+fishes = passDaysFast(fishesInit,256)
 print(fishes)
