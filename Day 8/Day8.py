@@ -46,10 +46,10 @@ def getOutputDigitCount(outputDigits):
 
 
 def digitSum(digitCount):
-    s = 0
+    sumDigits = 0
     for key, value in digitCount.items():
-        s += value
-    return s
+        sumDigits += value
+    return sumDigits
 
 def getEasyNumbers(keys,patterns):
     for p in patterns:
@@ -69,9 +69,9 @@ def getHardNumbers(keys,patterns):
             length = len(p)
             p = set(p)
             if length == 6:
-                if (set.union(keys[1],keys[4],keys[7]).issubset(p)):
+                if (set.union(keys[4],keys[7]).issubset(p)):
                     keys[9] = p
-                elif set.union(keys[1],keys[7]).issubset(p) and not keys[4].issubset(p):
+                elif keys[1].issubset(p) and not keys[4].issubset(p):
                     keys[0] = p
                 else:
                     keys[6] = p
@@ -84,21 +84,18 @@ def getHardNumbers(keys,patterns):
                     keys[2] = p
 
 def getNumbers(inputs):
-    # print(input)
     firstHalf,secondHalf = inputs.split('|')
-    patterns, values = firstHalf.split(), secondHalf.split()
+    patterns, outputs = firstHalf.split(), secondHalf.split()
     keys = {}
     getEasyNumbers(keys,patterns)
-
     getHardNumbers(keys,patterns)
-
-    s = ''
-    for value in values:
-        value = set(value)
-        for k,v in keys.items():
-            if v == value:
-                s += str(k)
-    return s
+    numberString = ''
+    keysFlipped = {''.join(sorted(list(value))):key for key,value in keys.items()}
+    for output in outputs:
+        output = ''.join(sorted(list(output)))
+        if output in keysFlipped:
+            numberString += str(keysFlipped[output])
+    return numberString
 
 
 inputs = getInputs(INPUTREAL)
