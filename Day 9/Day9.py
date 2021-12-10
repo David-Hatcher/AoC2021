@@ -67,10 +67,7 @@ def findBasins(heights,rows,cols):
     return basinSizes
 
 def findBasin(heights,i,j,rows,cols):
-    #base case, current points out of bounds, don't recurse
-    if i < 0 or i > rows or j < 0 or j > cols:
-        return 0
-    #check current value and add one to the basin size
+    #check current height and add one to the basin size
     heights[i][j][1] = 'checked'
     basinSize = 1
     #check up
