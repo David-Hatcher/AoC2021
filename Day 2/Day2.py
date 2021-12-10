@@ -13,6 +13,7 @@ def getInputsPartOne(fileName):
             commands[direction] += magnitude
         except:
             commands[direction] = magnitude
+    file.close()
     return commands
 
 def getInputsPartTwo(fileName):

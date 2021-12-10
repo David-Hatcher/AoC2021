@@ -17,6 +17,7 @@ def getInputs(fileName):
         yOne.append(int(posOne[1]))
         xTwo.append(int(posTwo[0]))
         yTwo.append(int(posTwo[1]))
+    file.close()
     return xOne, yOne, xTwo, yTwo
 
 def findMaxValues(x,y,xx,yy):

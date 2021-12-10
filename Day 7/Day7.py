@@ -6,6 +6,7 @@ INPUTTEST = 'inputtest.txt'
 def getInputs(fileName):
     file = open(fileName,'r')
     line = [int(x) for x in file.readline().strip().split(',')]
+    file.close()   
     return line
 
 def findBestLine(crabs):

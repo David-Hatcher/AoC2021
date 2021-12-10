@@ -24,6 +24,7 @@ def getInput(fileName):
             currentBoard = []
             continue
     boards.append(currentBoard)
+    file.close()
     return numbers, boards
 
 def buildBoards(boards):

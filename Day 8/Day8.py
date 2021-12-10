@@ -10,6 +10,7 @@ def getInputs(fileName):
     for line in lines:
         line = line.strip()
         inputs.append(line)
+    file.close()   
     return inputs
 
 def getOutputDigits(inputs):

@@ -8,6 +8,7 @@ def getInputs(fileName):
     inputs = []
     for line in lines:
         inputs.append(line.strip())
+    file.close()
     return inputs
 
 def getMostCommonBits(inputs):
