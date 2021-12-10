@@ -19,18 +19,22 @@ def getRowsCols(inputs):
 
 def isThisLowPoint(heights,i,j,rows,cols):
     currentNumber = heights[i][j]
+    #check left
     if j - 1 >= 0:
         leftNum = heights[i][j - 1]
         if leftNum <= currentNumber:
             return False
+    #check right
     if j + 1 <= cols - 1:
         rightNum = heights[i][j + 1]
         if rightNum <= currentNumber:
             return False
+    #check up
     if i - 1 >= 0:
         topNum = heights[i - 1][j]
         if topNum <= currentNumber:
             return False
+    #check down
     if i + 1 <= rows - 1:
         downNum = heights[i + 1][j]
         if downNum <= currentNumber:
@@ -58,6 +62,7 @@ def findBasins(heights,rows,cols):
     for i in range(rows):
         for j in range(cols):
             if heights[i][j][0] != 9 and heights[i][j][1] != 'checked':
+                #find size for current basin as the current point is neither already check or 9 height
                 basinSizes.append(findBasin(heights,i,j,rows,cols))
     return basinSizes
 
