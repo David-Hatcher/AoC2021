@@ -23,6 +23,7 @@ def getInputs(fileName):
             line = line.strip().split(' ')
             foldInstructions = line[2].split('=')
             folds.append({'axis' : foldInstructions[0], 'point' : int(foldInstructions[1])})
+    file.close()
     return points, folds
 
 def getMaxValues(points):
