@@ -1,5 +1,4 @@
 import copy
-import time
 
 '''Global Defs'''
 INPUTTEST = 'inputtest.txt'
