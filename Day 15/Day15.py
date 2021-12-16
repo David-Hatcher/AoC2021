@@ -44,19 +44,6 @@ class Graph():
             for vert in row:
                 self.vertDict[vert.name] = vert
     def findSmallestDistance(self,distances,visited):
-        # d = copy.copy(distances)
-        # for v in visited:
-        #     del d[v]
-        # invDist = { v: k for k,v in d.items() }
-        # i = 0
-        # smallest = ''
-        # foundSmallest = False
-        # while not foundSmallest:
-        #     if i in invDist:
-        #         smallest = invDist[i]
-        #         foundSmallest = True
-        #     i += 1
-        # return smallest
         distance = float('inf')
         smallest = ''
         for key, value in distances.items():
