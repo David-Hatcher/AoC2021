@@ -43,14 +43,6 @@ class Graph():
         for row in self.vertices:
             for vert in row:
                 self.vertDict[vert.name] = vert
-    def findSmallestDistance(self,distances,visited):
-        distance = float('inf')
-        smallest = ''
-        for key, value in distances.items():
-            if value < distance and not visited[key]:
-                smallest = key
-                distance = value
-        return smallest
     def dijkstra(self,start,finish):
         self.buildVertexDict()
         distances = { x : float('inf') for x in self.vertNames}
