@@ -3,6 +3,7 @@ import copy
 INPUTTEST = 'inputtest.txt'
 INPUTREAL = 'input.txt'
 
+
 def getInputs(fileName):
     file = open(fileName,'r')
     lines = file.readlines()
@@ -46,6 +47,7 @@ def createCountDict(template,replaceDict):
 
 def findMostMinusLeast(counts):
     return max(counts.values()) - min(counts.values())
+
 
 '''Part One'''
 template, replaceDict = getInputs(INPUTREAL)
