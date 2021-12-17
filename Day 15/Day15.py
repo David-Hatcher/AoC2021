@@ -3,7 +3,6 @@ from queue import PriorityQueue
 '''Global Defs'''
 INPUTTEST = 'inputtest.txt'
 INPUTREAL = 'input.txt'
-IS = 'inputsample.txt'
 
 class Graph():
     def __init__(self,nodes):
