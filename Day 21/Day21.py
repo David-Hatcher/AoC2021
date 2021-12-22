@@ -2,6 +2,7 @@
 INPUTTEST = 'inputtest.txt'
 INPUTREAL = 'input.txt'
 
+import time
 from itertools import product
 from functools import lru_cache
 
@@ -79,13 +80,18 @@ def takeTurn(currentPosition,currentScore,roll):
     newScore = currentScore + newPosition
     return newScore, newPosition
 
+'''Memoized function'''
+def getWinsCountMemo(player, pOnePos, pOneScore, pTwoPos, pTwoScore):
+    key = f'{player}{pOnePos}{pOneScore}{pTwoPos}{pTwoScore}'
+    if key in winsDict:
+        return winsDict[key]
 
-@lru_cache(maxsize=None)
-def getWinsCount(player, pOnePos, pOneScore, pTwoPos, pTwoScore):
     if pOneScore >= 21:
-        return 1, 0
+        winsDict[key] = [1,0]
+        return winsDict[key]
     elif pTwoScore >= 21:
-        return 0, 1
+        winsDict[key] = [0,1]
+        return winsDict[key]
 
     wins = [0,0]
     products = product(range(1,4), repeat=3)
@@ -93,15 +99,19 @@ def getWinsCount(player, pOnePos, pOneScore, pTwoPos, pTwoScore):
         rollSum = sum(rolls)
         if player == 0:
             newScore, newPosition = takeTurn(pOnePos, pOneScore, rollSum)
-            pOneWins, pTwoWins = getWinsCount(1, newPosition, newScore, pTwoPos, pTwoScore)
+            pOneWins, pTwoWins = getWinsCountMemo(1, newPosition, newScore, pTwoPos, pTwoScore)
         else:
             newScore, newPosition = takeTurn(pTwoPos, pTwoScore, rollSum)
-            pOneWins, pTwoWins = getWinsCount(0, pOnePos, pOneScore, newPosition, newScore)
+            pOneWins, pTwoWins = getWinsCountMemo(0, pOnePos, pOneScore, newPosition, newScore)
         wins[0] += pOneWins
         wins[1] += pTwoWins
 
-    return wins
+    winsDict[key] = wins
+    return winsDict[key]
 
-wins = getWinsCount(0, starting[0], 0, starting[1], 0)
+start = time.time()
+wins = getWinsCountMemo(0, starting[0], 0, starting[1], 0)
+end = time.time()
+print(end - start)
 print(wins)
 print(max(wins))
