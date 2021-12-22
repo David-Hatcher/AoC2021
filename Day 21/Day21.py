@@ -1,10 +1,9 @@
+from itertools import product
+
 '''Global Defs'''
 INPUTTEST = 'inputtest.txt'
 INPUTREAL = 'input.txt'
 
-import time
-from itertools import product
-from functools import lru_cache
 
 def getInputs(fileName):
     file = open(fileName,'r')
@@ -66,19 +65,25 @@ while True:
     g.runTurn()
     winner = g.winnerFound()
     if winner != 0:
-        print("playerOne", g.pOneScore, g.pOneScore * g.getNumberOfRolls())
-        print("playerTwo", g.pTwoScore, g.pTwoScore * g.getNumberOfRolls())
+        if winner == 2:
+            print("Player One loses, score =", g.pOneScore, "Losing score * Roll Count =", g.pOneScore * g.getNumberOfRolls())
+        else:
+            print("Player Two loses, Score =", g.pTwoScore, "Losing Score * Roll Count =", g.pTwoScore * g.getNumberOfRolls())
         break
 
 
 '''Part Two'''
-
 winsDict = {}
+turnDict = {}
 
 def takeTurn(currentPosition,currentScore,roll):
+    key = f'{currentPosition}{currentScore}{roll}'
+    if key in turnDict:
+        return turnDict[key]
     newPosition = (currentPosition + roll - 1) % 10 + 1
     newScore = currentScore + newPosition
-    return newScore, newPosition
+    turnDict[key] = [newScore, newPosition]
+    return turnDict[key]
 
 '''Memoized function'''
 def getWinsCountMemo(player, pOnePos, pOneScore, pTwoPos, pTwoScore):
@@ -109,9 +114,5 @@ def getWinsCountMemo(player, pOnePos, pOneScore, pTwoPos, pTwoScore):
     winsDict[key] = wins
     return winsDict[key]
 
-start = time.time()
 wins = getWinsCountMemo(0, starting[0], 0, starting[1], 0)
-end = time.time()
-print(end - start)
-print(wins)
 print(max(wins))
