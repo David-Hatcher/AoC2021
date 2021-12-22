@@ -124,5 +124,8 @@ def parsePacket(currentIndex):
 packet = getInputs(INPUTREAL)
 versionNumbers = []
 total, currentIndex = parsePacket(0)
+'''Part One'''
 print(f'version sum: {sum(versionNumbers)}')
+
+'''Part Two'''
 print(f'total: {total}')
