@@ -3,9 +3,6 @@ import copy
 '''Global Defs'''
 INPUTTEST = 'inputtest.txt'
 INPUTREAL = 'input.txt'
-IS = 'inputsample.txt'
-
-
 
 def getInputs(fileName):
     file = open(fileName,'r')

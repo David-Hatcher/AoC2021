@@ -8,6 +8,7 @@ INPUTREAL = 'input.txt'
 def getInputs(fileName):
     file = open(fileName,'r')
     lines = file.readlines()
+    file.close()
     startingSpaces = []
     for line in lines:
         startingSpaces.append(int(line.strip().split(': ')[1]))
